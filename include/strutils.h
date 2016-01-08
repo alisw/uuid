@@ -78,7 +78,11 @@ static inline char *strdup_to_offset(void *stru, size_t offset, const char *str)
 #define strdup_to_struct_member(_s, _m, _str) \
 		strdup_to_offset((void *) _s, offsetof(__typeof__(*(_s)), _m), _str)
 
+#ifdef __APPLE__
+extern void strmode(int mode, char *str);
+#else
 extern void strmode(mode_t mode, char *str);
+#endif
 
 /* Options for size_to_human_string() */
 enum
